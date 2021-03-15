@@ -1,0 +1,221 @@
+body, html {
+    height: auto;
+    margin: 0;
+  }
+  
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 1s ease;
+}
+
+a:hover{
+    color: #72C8DF;
+    transition: all 1s ease;
+}
+
+a, p, h1, h2, h3, h4{
+    color: white;
+}
+
+header{
+    background-color: black;
+    height: 74px;
+}
+
+.navbar-toggler {
+    color: #72C8DF;
+    border: none;
+    padding: 12px 18px;
+    font-size: 2rem;
+}
+
+.home{
+    background-image: url('img/back.png');
+    height: 710px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-purple{
+    background-color: rgb(44, 44, 44);
+}
+
+.about{
+    background: linear-gradient(#003871, #1A7CA4);
+}
+
+.skills{
+    background-image: url('img/skills_bg.png');
+    height: 750px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top: solid 5px black;
+}
+
+.parcours{
+    background: linear-gradient(to right, #80C4D7 , #1870A0);
+    border-top: solid 5px black;
+
+}
+
+.contact{
+    background-color: rgb(44, 44, 44);
+}
+
+.copyrights{
+    background-color: rgb(15, 15, 15);
+}
+
+p, li{
+    font-family: 'Blinker', sans-serif;
+}
+
+h1, h2, h3, h4{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+.title{
+    width: fit-content;
+}
+
+.coolfont{
+    font-family: 'Shadows Into Light Two', cursive;
+}
+
+.logo{
+    font-size: 2em;
+}
+
+:root {
+    --shadow-color: #003871;
+    --shadow-color-light: white;
+  }
+
+.frontend {
+    color: white;
+    animation: neon 3s infinite;
+    font-size: 8em;
+  }
+  
+  @keyframes neon {
+    0% {
+      text-shadow: -1px -1px 1px var(--shadow-color-light), -1px 1px 1px var(--shadow-color-light), 1px -1px 1px var(--shadow-color-light), 1px 1px 1px var(--shadow-color-light),
+      0 0 3px var(--shadow-color-light), 0 0 10px var(--shadow-color-light), 0 0 20px var(--shadow-color-light),
+      0 0 30px var(--shadow-color), 0 0 40px var(--shadow-color), 0 0 50px var(--shadow-color), 0 0 70px var(--shadow-color), 0 0 100px var(--shadow-color), 0 0 200px var(--shadow-color);
+    }
+    50% {
+      text-shadow: -1px -1px 1px var(--shadow-color-light), -1px 1px 1px var(--shadow-color-light), 1px -1px 1px var(--shadow-color-light), 1px 1px 1px var(--shadow-color-light),
+      0 0 5px var(--shadow-color-light), 0 0 15px var(--shadow-color-light), 0 0 25px var(--shadow-color-light),
+      0 0 40px var(--shadow-color), 0 0 50px var(--shadow-color), 0 0 60px var(--shadow-color), 0 0 80px var(--shadow-color), 0 0 110px var(--shadow-color), 0 0 210px var(--shadow-color);
+    }
+    100% {
+      text-shadow: -1px -1px 1px var(--shadow-color-light), -1px 1px 1px var(--shadow-color-light), 1px -1px 1px var(--shadow-color-light), 1px 1px 1px var(--shadow-color-light),
+      0 0 3px var(--shadow-color-light), 0 0 10px var(--shadow-color-light), 0 0 20px var(--shadow-color-light),
+      0 0 30px var(--shadow-color), 0 0 40px var(--shadow-color), 0 0 50px var(--shadow-color), 0 0 70px var(--shadow-color), 0 0 100px var(--shadow-color), 0 0 200px var(--shadow-color);
+    }
+
+  }
+
+.backend{
+    font-family: 'DotGothic16', sans-serif;
+    font-size: 8em;
+}
+
+
+
+.lineonside {
+    text-align:center;
+    text-transform:uppercase;
+    font-weight:100;
+    
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: 20px 0;
+    grid-gap: 20px;
+  }
+  
+  .lineonside:after, .lineonside:before {
+    content: " ";
+    display: block;
+    border-bottom: 3px solid #fffc5b;
+  }
+
+
+.carte{
+    height: 400px;
+    width: 300px;
+    background-image: url(img/cart.png);
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+
+.carte:hover{
+    transform: scale(1.05);
+    transition: all .5s;
+    z-index: 100;
+    box-shadow: 0 0 10px white;
+}
+
+.link{
+    background-color: #3f96ad;
+    padding: 5px 20px;
+    border-radius: 8%;
+}
+
+.link:hover{
+    background-color: #ffff;
+}
+
+
+
+li{
+    list-style: none;
+    color: white;
+}
+
+i:hover{
+    color: #72C8DF;
+}
+
+i{
+    padding-right: 5px;
+}
+
+.networks{
+    font-size: 70px;
+}
+
+@media screen and (max-width: 720px) {
+    .backend, .frontend {
+font-size: 4em;  
+    }
+
+    .skills{
+        height: 1300px;
+    }
+
+    .home{
+        height: 600px
+        ;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .backend, .frontend {
+font-size: 4em;  
+    }
+
+    .skills{
+        height: 1100px;
+    }
+
+    .home{
+        height: 600px
+        ;
+    }
+}
