@@ -9,6 +9,7 @@ html,body
 
 html{
     overflow-y: initial;
+
 }
 
 body {
@@ -63,13 +64,21 @@ header{
 }
 
 .skills{
-    background-image: url('img/skills_bg.png');
+    background-image: url('img/skill_bg.png');
     height: auto;
     background-position: center center;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
     border-top: solid 5px black;
     background-attachment: fixed;
+}
+
+.brush-bg{
+    background-image: url('img/brush-bg.svg');
+    background-repeat: no-repeat;
+    padding: 8px 0;
+    width: fit-content;
+    background-size: 100% 100%;
 }
 
 .parcours{
@@ -174,7 +183,7 @@ h1, h2, h3, h4{
     transform: scale(1.05);
     transition: all .5s;
     z-index: 100;
-    box-shadow: 0 0 10px white;
+    box-shadow: 0 0 20px white;
 }
 
 .link{
