@@ -52,6 +52,10 @@ header{
     font-size: 2rem;
 }
 
+.fa-cart-arrow-down:hover{
+    color: #fffc5b;
+}
+
 .home{
     background-image: url('img/back.png');
     height: 710px;
