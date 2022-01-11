@@ -495,33 +495,16 @@ font-size: 6em;
     border: 5px solid black;
     border-radius: 15px;
 }
-.progress100 .color{
+ .color100, .color90, .color80, .color70{
     position: absolute;
     background-color: #fffc5b;
     width: 0px;
     height: 20px;
     border-radius: 15px;
-    animation: progress100 5s infinite linear;    
+    -webkit-transition: none !important;
+    transition: none !important;
 }
 
-
-@keyframes progress100{
-    0%{
-      width: 0%;
-    }
-    25%{
-        width: 50%;
-    }
-    50%{
-        width: 90%;
-    }
-    75%{
-        width: 100%;
-    }
-    100%{
-        width: 100%;
-    }
-};
 
 
 /* The progress container */
@@ -533,6 +516,6 @@ font-size: 6em;
   /* The progress bar (scroll indicator) */
   .progress-bar {
     height: 8px;
-    background: #72C8DF;
+    background: #fffc5b;
     width: 0%;
   }
