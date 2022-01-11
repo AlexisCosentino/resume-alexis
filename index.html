@@ -18,6 +18,9 @@
 
 <body>
     <header class="bg-black position-fixed w-100" style="z-index: 10;">
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
         <div class="container">
 
             <nav class="navbar navbar-expand-lg">
@@ -193,7 +196,7 @@
                                 </li>
                                 <li class="mb-4">
                                     <h5 style="margin-right: 15px;">API Rest</h5>
-                                    <div class=" progress100">
+                                    <div class=" progress100 p-75">
                                         <div class="color"></div>
                                     </div>
                                 </li>
@@ -394,8 +397,27 @@
     </script>
 
     <script>
-        console.log("coucou")
-        let TxtType = function(el, toRotate, period) {
+
+
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function() {myFunction()};
+
+        function myFunction() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        document.getElementById("myBar").style.width = scrolled + "%";
+        }
+
+
+    console.log(
+        "Bonjour toi !" + " " +
+        "N'hésite pas à m'appeler pour discuter. A très bientôt !"
+    )
+
+
+    //TYPEWRITER JS    
+    let TxtType = function(el, toRotate, period) {
         this.toRotate = toRotate;
         this.el = el;
         this.loopNum = 0;
