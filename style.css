@@ -519,3 +519,74 @@ font-size: 6em;
     background: #fffc5b;
     width: 0%;
   }
+
+   .parcours-in a{
+      background-color: #1A7CA4;
+      color: white;
+      border-color: white;
+  }
+
+  .parcours-in a:hover{
+    background-color: white;
+    color: #1A7CA4;
+    border-color: #1A7CA4;
+}
+
+
+.hello{
+    z-index: 1;
+    line-height: 200px;
+    font-size: 115px;
+    letter-spacing: -5px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 900;
+    text-align: center;
+    color: rgb(0, 56, 112);
+    text-shadow:rgb(0, 56, 113) 1px 1px,
+                rgb(0, 57, 114) 2px 2px,
+                rgb(1, 58, 115) 3px 3px,
+                rgb(1, 59, 116) 4px 4px,
+                rgb(1, 60, 117) 5px 5px,
+                rgb(2, 61, 118) 6px 6px,
+                rgb(2, 62, 119) 7px 7px,
+                rgb(2, 63, 120) 8px 8px,
+                rgb(2, 64, 121) 9px 9px,
+                rgb(3, 65, 122) 10px 10px,
+                rgb(3, 66, 123) 11px 11px,
+                rgb(3, 67, 124) 12px 12px,
+                rgb(3, 68, 125) 13px 13px,
+                rgb(4, 69, 126) 14px 14px,
+                rgb(4, 70, 127) 15px 15px,
+                rgb(4, 71, 128) 16px 16px,
+                rgb(4, 72, 129) 17px 17px,
+                rgb(5, 73, 130) 18px 18px,
+                rgb(5, 74, 131) 19px 19px,
+                rgb(5, 75, 132) 20px 20px,
+                rgb(5, 76, 133) 21px 21px,
+                rgb(6, 77, 134) 22px 22px,
+                rgb(6, 78, 135) 23px 23px,
+                rgb(6, 79, 136) 24px 24px;
+  }
+  
+  .bubbles > .particle {
+    opacity: 0;
+    background-color: rgba(33, 150, 243, 0.5);
+    animation: bubbles 3s ease-in infinite;
+    border-radius: 100%;
+}
+
+  @keyframes bubbles {
+    0% {
+        opacity: 0;
+   }
+    20% {
+        opacity: 1;
+        transform: translate(0, -20%);
+   }
+    100% {
+        opacity: 0;
+        transform: translate(0, -1000%);
+   }
+}

@@ -24,7 +24,11 @@
         <div class="container">
 
             <nav class="navbar navbar-expand-lg">
-                <a class=" navbar-brand logo coolfont" href="#home"><strong>Cosentino</strong> Alexis</a>
+                <div class="navbar-brand">
+                    <div style="position:relative;">
+                        <a class="particletext bubbles navbar-brand logo coolfont" href="#home"><strong>Cosentino</strong> Alexis</a>
+                    </div>
+                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toNavLink"
                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
@@ -103,8 +107,9 @@
                             <br>Valence, 26000</p>
                     </div>
 
-                    <div class="col-12 col-lg-6 pt-5 d-flex flex-column justify-content-center align-items-center">
+                    <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-center">
 
+                        <h1 class="mb-5 hello">HELLO!</h1>
 
                         <p class="text-justify" data-aos="fade-left"><strong>7 ans d’éxpérience</strong> dans la vente et conseil.
                             <br><br>
@@ -242,7 +247,9 @@
                                         <p>Gestion de projet</p>
                                         <p>Méthode Agile - Scrum,</p>
                                         <p>UX / UI Design.</p>
-                                    <p class="mt-3 text-center">Actuellement en poste</p>                        
+                                    <p class="mt-3 text-center">Jouvenc'I.A. - Depuis 06/2021</p>
+                                    <a class="btn btn-outline mt-3" target="_blank" href="https://www.lifefocus.fr">SITE</a>
+                        
                                 </div>
                                 
                                 <div class="card">
@@ -256,6 +263,7 @@
                                         <p>Créatif et artistique,</p>
                                         <p>Soucis du détail.</p>
                                     <p class="mt-3 text-center">Indépendant depuis 2018 - Life Focus</p>
+                                    <a class="btn btn-outline mt-3" target="_blank" href="https://mdm.jouvencia.net">SITE</a>
                                 </div>
                                 
                                 <div class="card">
@@ -265,6 +273,7 @@
                                         <p>Négociation,</p>
                                         <p>Communication positive,</p>
                                         <p>Sens de la présentation et courtoisie, </p>
+                                        <p>Management, </p>
                                         <p>Sens de l'organisation. </p>
         
                                     <p class="mt-3 text-center">2 ans chez Décathlon, 2 ans à la Fnac, 2 chez AppleCare et 1 an chez
@@ -398,6 +407,7 @@
     </script>
 
     <script>
+        //PROGRESS BAR SKILLS JS
         function progress(){
             $('.color90').animate({width:"90%"},2500);
             $('.color100').animate({width:"100%"},2500);
@@ -428,6 +438,28 @@
         "Bonjour toi !" + " " +
         "N'hésite pas à m'appeler pour discuter. A très bientôt !"
     )
+
+
+    //title bubbles
+    function initparticles() {
+        bubbles();
+    }
+    function bubbles() {
+        $.each($(".particletext.bubbles"), function(){
+            var bubblecount = ($(this).width()/50)*10;
+            for(var i = 0; i <= bubblecount; i++) {
+                var size = ($.rnd(40,80)/10);
+                $(this).append('<span class="particle" style="top:' + $.rnd(20,80) + '%; position:absolute; left:' + $.rnd(0,95) + '%;width:' + size + 'px; height:' + size + 'px;animation-delay: ' + ($.rnd(0,30)/10) + 's;"></span>');
+            }
+        });
+    }
+    jQuery.rnd = function(m,n) {
+      m = parseInt(m);
+      n = parseInt(n);
+      return Math.floor( Math.random() * (n - m + 1) ) + m;
+    }
+
+    initparticles();
 
 
     //TYPEWRITER JS    
