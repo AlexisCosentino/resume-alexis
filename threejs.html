@@ -7,7 +7,8 @@
     <link rel="icon" type="image/png" href="img/code.png"/>
     <meta name="description"
         content="Générateur de vague en js.">
-    <title>CV Alexis Cosentino</title></head>
+    <title>CV Alexis Cosentino</title>
+</head>
 <style>
 html, body {
   height: 100vh;
@@ -105,7 +106,6 @@ a{
 
     <div id="page">
         <main role="main" class="inner cover">
-            <a class="btn" href="index.html#portfolio">RETOUR CV ALEXIS C</a>
           <h1>Générateur de vagues</h1>
           <p class="lead">Création de background intéractif avec <a href="https://threejs.org"
               target="_blank">ThreeJS</a> et <a
@@ -119,11 +119,12 @@ a{
                 <input type="range" min="1" max="100" class="custom-range" id="noiseInput">
               </div>
               <div class="form-group col-sm-6">
-                <label for="heightInput" class="form-label">Taille</label>
+                <label for="heightInput" class="form-label">Taille des vagues</label>
                 <input type="range" min="1" max="100" class="custom-range" id="heightInput">
               </div>
             </div>
-            <div class="form-group col-md-12">
+            <div style="display: flex;">
+              <a class="btn" href="index.html#portfolio">RETOUR CV ALEXIS</a>
               <a class='btn' id="trigger" href="#">RANDOM COLOR</a>
             </div>
           </form>
