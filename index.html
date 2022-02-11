@@ -17,6 +17,36 @@
         content="Bienvenue sur le CV d'Alexis Cosentino, technicien développeur web/IoT. Vous y trouverez toutes les informations me concernant ainsi que mes projets réalisés.">
     <title>CV Alexis Cosentino</title>
 
+    <script>
+        function includeHTML() {
+          var z, i, elmnt, file, xhttp;
+          /*loop through a collection of all HTML elements:*/
+          z = document.getElementsByTagName("*");
+          for (i = 0; i < z.length; i++) {
+            elmnt = z[i];
+            /*search for elements with a certain atrribute:*/
+            file = elmnt.getAttribute("w3-include-html");
+            if (file) {
+              /*make an HTTP request using the attribute value as the file name:*/
+              xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                  if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                  if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                  /*remove the attribute, and call this function once more:*/
+                  elmnt.removeAttribute("w3-include-html");
+                  includeHTML();
+                }
+              }      
+              xhttp.open("GET", file, true);
+              xhttp.send();
+              /*exit the function:*/
+              return;
+            }
+          }
+        };
+        </script>
+
 </head>
 
 <body>
@@ -293,7 +323,11 @@
                             </div>
                         </a>
                     </div>
-                </div>                
+                </div>  
+                
+                <div id="chat">
+                    <div w3-include-html="chat.html"></div> 
+                </div>
             </div>
         </section>
 
@@ -468,13 +502,16 @@
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
 
 
     <!-- AOS SCRIPT -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
+    </script>
+
+    <script>
+        includeHTML();
     </script>
 
     <script>
