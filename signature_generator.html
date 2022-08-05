@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/code.png"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Signature Generator</title>
+</head>
+<body>
+    <style>
+        a, p, h1, h3, span{
+          text-decoration: none!important;
+        }
+        a, p{
+            font-size: 10px;
+        }
+        #card-website, #card-job{
+            color: black;
+            background-color: white;
+        }
+        #base{
+          font-family: "Courier New";
+          color: white;
+          background-color: black;
+          width: 400px;
+          height: 110px;
+          border-radius: 15px;
+        }
+
+        #card-email, #card-number{
+            color: white;
+        }
+
+
+
+        
+    .btn {
+        position: relative;
+        display: inline-block;
+        margin: 15px;
+        padding: 12px 27px;
+        text-align: center;
+        font-size: 16px;
+        letter-spacing: 1px;
+        text-decoration: none;
+        color: #999999;
+        background: #ffffff;
+        border: 3px solid #999999;
+        cursor: pointer;
+        transition: ease-out 0.5s;
+        -webkit-transition: ease-out 0.5s;
+        -moz-transition: ease-out 0.5s;
+    }
+
+    .btn::after,
+    .btn::before {
+        position: absolute;
+        content: "";
+        width: 0%;
+        height: 0%;
+        visibility: hidden;
+    }
+
+    .btn::after {
+        bottom: -3px;
+        right: -3px;
+        border-left: 3px solid #222222;
+        border-bottom: 3px solid #222222;
+        transition: width .1s ease .1s, height .1s ease, visibility 0s .2s;
+    }
+
+    .btn::before {
+        top: -3px;
+        left: -3px;
+        border-top: 3px solid #222222;
+        border-right: 3px solid #222222;
+        transition: width .1s ease .3s, height .1s ease .2s, visibility 0s .4s;
+    }
+
+    .btn:hover {
+        animation: pulse 1s ease-out .4s;
+        color: #222222;
+    }
+
+    .btn:hover::after,
+    .btn:hover::before {
+        width: calc(100% + 3px);
+        height: calc(100% + 3px);
+        visibility: visible;
+        transition: width .1s ease .2s, height .1s ease .3s, visibility 0s .2s;
+    }
+
+    .btn:hover::after {
+        transition: width .1s ease .2s, height .1s ease .3s, visibility 0s .2s;
+    }
+
+    .btn:hover::before {
+        transition: width .1s ease, height .1s ease .1s;
+    }
+        </style>
+      <div class="container">
+        <a class="btn" href="index.html#portfolio">RETOUR CV ALEXIS C</a>
+
+        <h1 class="text-center mt-2 mb-5"> Change it to your own signature</h1>
+    
+      <table id="base">
+        <tbody id="base_font">
+            <tr>
+                <td>
+                    <table style="margin-left: auto; margin-right: auto;">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <img id="card-pic" src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.6435-9/122492346_10222845159585206_3736025077167309673_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=174925&_nc_ohc=RntNP-WQ7pgAX9Pwnhk&tn=SMFRxKlGWZNc4HQQ&_nc_ht=scontent-cdg2-1.xx&oh=00_AT9eiIMjKuKoniLKeajF7Aqt2ShGhFOrHSdw3RGAqADg5w&oe=630DC752" style="border-radius: 50%; max-width: 80px; max-height: 80px; border: solid 2px white; object-fit: cover;">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </td>
+                <td style="margin-left:auto; margin-right: auto;">
+                  <div id='card-line' style="border-left: solid 1px white; height: 100px;"></div>
+                </td>
+                <td>
+                    <table style=" margin-left: auto; margin-right: auto;">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div style="padding: 5px 0px;">
+                              <h1 id="card-name" style="font-size: 20px; margin-top: 0; font-weight: bold;"><strong>Alexis COSENTINO</strong></h1>
+                              <h3 id="card-job" style="width: fit-content; padding: 2px 5px; font-size: 13px;">Web Apps Developer</h3>
+                                <a id="card-email" href="mailto:dev.acosentino@gmail.com" style="margin: 2px; text-decoration: none;">
+                                  <span>dev.acosentino@gmail.com</span>
+                                </a><br>
+                                <a id="card-number" href="tel:+33761939631" style="margin: 2px; text-decoration: none;">
+                                <span>+33 07 61 93 96 31</span></a>
+                                <p id="card-address" style="margin: 2px;">Romans-sur-Isère, 26100</p>
+                              <div style="margin-top: 10px;">
+                                <a id="card-website" style="margin-top:10px; padding: 2px 5px; border-radius: 15px; width: fit-content;" href="http://alexiscosentino.netlify.app/" target="_blank"><span style="text-decoration: none; font-size:11px; font-weight: bold;">Website</span></a>
+                                <a id="card-linkedin" style="color:white; background-color: #0e76a8; margin-top:10px; padding: 2px 5px; border-radius: 15px; width: fit-content; background-color: #0e76a8; margin-left:10px;" href="https://www.linkedin.com/in/alexis-cosentino/" target="_blank"><span style="text-decoration: none; color:white; font-size:11px; font-weight: bold;">LinkedIn</span></a>
+      
+                              </div>
+                          </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left:30px;"><a id='copyright' href="http://alexiscosentno.netlify.app/" target="_blank" style="text-decoration:none ; color:white; font-size:7px; ">Created by Alexis Cosentino</a></td>
+            </tr>
+        </tbody>
+    </table>
+    
+      <div class="row mt-5">
+
+        <div class="col-md-6">
+            <div>
+                <label class="form-label" for="name">Enter your full name : </label>
+                <input class="form-control" type="text" name="name" id="name">
+            </div>
+        
+            <div class="form-example">
+                <label class="form-label" for="name">Enter job position : </label>
+                <input class="form-control" type="text" name="name" id="job">
+            </div>
+        
+            <div class="form-example">
+                <label class="form-label" for="name">Enter your E-mal address : </label>
+                <input class="form-control" type="text" name="name" id="email">
+            </div>
+        
+            <div class="form-example">
+                <label class="form-label" for="name">Enter your phone number : </label>
+                <input class="form-control" type="text" name="name" id="number">
+            </div>
+        
+            <div class="form-example">
+                <label class="form-label" for="name">Enter your address : </label>
+                <input class="form-control" type="text" name="name" id="address">
+            </div>  
+        </div>
+
+        <div class="col-md-6">
+            <div>
+                <label class="form-label" for="head">Choose a background color : </label>
+                <input type="color" id="bg-color" name="head">
+            </div>
+
+            <div class="form-check form-switch my-2">
+                <input class="form-check-input" type="checkbox" id="invert_color_font">
+                <label class="form-check-label" for="invert_color_font">Invert font color ?</label>
+            </div>
+
+            <select class="form-select my-2" id="font" aria-label="Default select example">
+                <option selected>Chose your font :</option>
+                <option value="Arial">Arial</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Trebuchet">trebuchet</option>
+                <option value="Courier">Courier</option>
+                <option value="Lucida">Lucida</option>
+                <option value="Time New Roman">Time New Roman</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Palatino">Palatino</option>
+            </select>
+        
+            <div class="form-example">
+                <label class="form-label" for="name">Enter your website's link : </label>
+                <input class="form-control" type="text" name="name" id="website">
+            </div>  
+        
+            <div class="form-example">
+                <label class="form-label" for="name">Enter your LinkedIn's link : </label>
+                <input  class="form-control"type="text" name="name" id="linkedin">
+            </div>  
+        
+            <div class="form-example">
+                <label class="form-label" for="name">Enter your profle picture's link : </label>
+                <input class="form-control" type="text" name="name" id="pic">
+            </div> 
+            
+            <select class="form-select my-2" id="pic_style" aria-label="Default select example">
+                <option selected>Chose your pic style :</option>
+                <option value="square">Square</option>
+                <option value="circle">Circle</option>
+                <option value="original">Original</option>
+            </select>
+
+            <div class="form-check form-switch my-2">
+                <input class="form-check-input" type="checkbox" id="remove_pic_border">
+                <label class="form-check-label" for="remove_pic_border">Remove image's border ?</label>
+            </div>
+        </div>
+
+    </div>
+
+    
+
+    </div>
+</div>
+
+<script>
+        console.log('nike ta mer');
+        const name = document.getElementById('card-name');
+        const job = document.getElementById('card-job');
+        const email = document.getElementById('card-email');
+        const address = document.getElementById('card-address');
+        const number = document.getElementById('card-number');
+        const pic = document.getElementById('card-pic');
+        const linkedin = document.getElementById('card-linkedin');
+        const website = document.getElementById('card-website');
+        const invert_color_font = document.getElementById('invert_color_font');
+        const pic_style = document.getElementById('pic_style');
+
+    
+    
+        document.getElementById('name').addEventListener('input', (e) => {
+        name.innerHTML = e.target.value;
+    });
+    
+    
+        document.getElementById('job').addEventListener('input', (e) => {
+        job.innerHTML = e.target.value;
+    });
+    
+        document.getElementById('email').addEventListener('input', (e) => {
+        email.innerHTML = e.target.value;
+        email.href = 'mailto:' + e.target.value;
+    });
+    
+        document.getElementById('number').addEventListener('input', (e) => {
+        number.innerHTML = e.target.value;
+        number.href = 'tel:' + e.target.value;
+    });
+    
+        document.getElementById('address').addEventListener('input', (e) => {
+            address.innerHTML = e.target.value;
+        });
+    
+        document.getElementById('pic').addEventListener('input', (e) => {
+            pic.src = e.target.value;
+        });
+    
+        document.getElementById('linkedin').addEventListener('input', (e) => {
+            linkedin.href = e.target.value;
+        });
+    
+        document.getElementById('website').addEventListener('input', (e) => {
+            website.href = e.target.value;
+        });
+    
+        document.getElementById('bg-color').addEventListener('input', (e) => {
+            document.getElementById('base').style =  "background-color:" + e.target.value;
+        });
+
+        document.getElementById('font').addEventListener('change', (e) => {
+            document.getElementById('base').style.fontFamily = e.target.value;
+        });
+
+        invert_color_font.addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('base_font').style = "color: black;"
+                document.getElementById('card-email').style = "color: black;"
+                document.getElementById('card-number').style = "color: black;"
+                document.getElementById('card-job').style = 'color: white; background-color: black; width: fit-content; padding: 2px 5px; font-size: 13px;';
+                document.getElementById('card-website').style = 'color: white; background-color: black; margin-top:10px; padding: 2px 5px; border-radius: 15px; width: fit-content;';
+                document.getElementById('card-line').style.borderColor = "black";
+                document.getElementById('card-pic').style.borderColor = "black";
+                document.getElementById('copyright').style.color = "black";
+
+
+
+            } else {
+                document.getElementById('base_font').style = "color: white;"
+                document.getElementById('card-email').style = "color: white;"
+                document.getElementById('card-number').style = "color: white;"
+                document.getElementById('card-job').style = 'color: black; background-color: white; width: fit-content; padding: 2px 5px; font-size: 13px;';
+                document.getElementById('card-website').style = 'color: black; background-color: white; margin-top:10px; padding: 2px 5px; border-radius: 15px; width: fit-content;';
+                document.getElementById('card-line').style.borderColor = "white";
+                document.getElementById('card-pic').style.borderColor = "white";
+                document.getElementById('copyright').style.color = "white";
+
+            }
+        });
+
+        pic_style.addEventListener('change', (e) => {
+            console.log('coucou babe', e.target.value)
+            if (e.target.value == "square") {
+                document.getElementById('card-pic').style.height = '80px';
+                document.getElementById('card-pic').style.width = '80px';
+                document.getElementById('card-pic').style.borderRadius = '0%';
+            } else if (e.target.value == 'circle'){
+                document.getElementById('card-pic').style.height = '80px';
+                document.getElementById('card-pic').style.width = '80px';
+                document.getElementById('card-pic').style.borderRadius = '50px';
+            } else {
+                document.getElementById('card-pic').style.removeProperty('height');
+                document.getElementById('card-pic').style.removeProperty('width');
+                document.getElementById('card-pic').style.maxHeight = '80px';
+                document.getElementById('card-pic').style.maxWidth = '120px';
+                document.getElementById('card-pic').style.borderRadius = '0%';
+
+            }
+        });
+
+        document.getElementById('remove_pic_border').addEventListener('change', function() {
+            if (this.checked){
+                document.getElementById('card-pic').style.border = 'none';
+            } else {
+                document.getElementById('card-pic').style.border = 'solid 2px';
+            }
+        })
+
+      </script>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</body>
+</html>
