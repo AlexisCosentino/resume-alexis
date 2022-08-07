@@ -68,7 +68,7 @@
 
 
             async function getCity(city){
-                const resp = await fetch('http://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=' + api_key);
+                const resp = await fetch('https://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=' + api_key);
                 return await resp.json()
             }
 
@@ -89,7 +89,7 @@
                 sunset_time = new Date (data.sys.sunset * 1000);
                 final_data.sunrise = sunrise_time.getHours() + ':' + sunrise_time.getMinutes();
                 final_data.sunset = sunset_time.getHours() + ':' + sunset_time.getMinutes();
-                final_data.icon = 'http://openweathermap.org/img/wn/'+data.weather[0].icon +'@2x.png'
+                final_data.icon = 'https://openweathermap.org/img/wn/'+data.weather[0].icon +'@2x.png'
                 final_data.humidity = data.main.humidity
 
                 console.log(final_data)
