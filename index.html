@@ -76,7 +76,7 @@
     </header>
 
     <main>
-        <section class="home d-flex justify-content-center align-items-center mt-5" id="home">
+        <section class="home d-flex justify-content-center align-items-center" id="home">
             <div class="container title">
                 <h2 class="pb-3 frontend" data-aos="fade-right" data-aos-easing="ease-in-sine" data-aos-duration="800">
                     <strong>Frontend</strong>
@@ -519,6 +519,14 @@
     </script>
 
     <script>
+        let menuHeight = $("header").height();
+        $("main").css("padding-top", menuHeight);
+        $( window ).resize(function() {
+            var menuHeight = $("header").height();
+            $("main").css("padding-top", menuHeight);
+        });
+
+
         //PROGRESS BAR SKILLS JS
         function progress(){
             function zero(){
