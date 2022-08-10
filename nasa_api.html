@@ -28,10 +28,14 @@
         <div class="d-flex flex-column justify-content-center align-items-center">
             <h1 class="m-3 font-weight-bold">EXPLORE THE SPACE</h1>
             <h2 class="mb-5 font-weight-bold">NASA</h2>
-            <div class="d-flex justify-content-center">
-                <button  class="btn btn-outline-light m-3" id="mars">Mars's last picture</button>    
+            <div class="d-flex justify-content-center flex-wrap">
+
+                <button  class="btn btn-outline-light m-3" id="mars">Mars last pictures <br> - PERSEVERANCE -</button>  
+                <button  class="btn btn-outline-light m-3" id="mars2">Mars's last pictures<br> - CURIOSITY -</button>
                 <button class="btn btn-outline-light m-3" id="today">Today's fact</button>
-                <button  class="btn btn-outline-light m-3" id="random">Random fact</button>   
+                <button  class="btn btn-outline-light m-3" id="random">Random fact</button>
+                <button  class="btn btn-outline-light m-3" id="who">Who's in space ?</button>   
+   
  
             </div>
 
@@ -50,16 +54,49 @@
         </div>
 
         <div class="row justify-content-center align-items-center"  id='mars-card' style="display: none;">
-            <div class="col-md-6">
+            <div>
                 <h1>Mars Rover - CURIOSITY</h1>
                 <p>Launch date : 2011 - 11 - 26</p>
                 <p>landing date : 2012 -08 -06</p>
-                <h3 id="camera">Camera de navigation</h3>
-                <p>Picture's date = <span id="mars-date"></span></p>
+                <h3 id="camera">Navigation Camera</h3>
             </div>
-            <div class="col-md-6">
-                <img id="mars-img" src="" class="img-fluid">
+            <div class="row m-5" id="picture-list">
+                
             </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center"  id='mars-card-2' style="display: none;">
+            <div>
+                <h1>Mars Rover - PERSEVERANCE</h1>
+                <p>Launch date : 2020 - 07 - 30</p>
+                <p>landing date : 2021 -02 -18</p>
+                <h3>Mast camera zoom left</h3>
+            </div>
+            <div class="row m-5" id="picture-list-2">
+                
+            </div>
+        </div>
+
+        <div class="text-center mt-5"  id='who_in_space' style="display: none;">
+                <h1 id="number_in_space" style="font-size: 5em;"></h1>
+                <h2>People in space right now</h2>
+                <div class="d-flex justify-content-center mt-5">
+
+                    <table class="table table-dark table-striped w-50">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Craft</th>
+                        </tr>
+                        </thead>
+                        <tbody id="table-body" class="table-hover">
+                        
+
+                        </tbody>
+                    </table>
+                </div>
+
         </div>
 
         
@@ -91,9 +128,21 @@
         document.getElementById('mars').addEventListener('click', async function() {
             const api_key = 'ZeizpwbDU72HCvWDQZdMOT19VqBKna3sMUbYmQn9';
             const result = await getMarsLastPicture(api_key);
-            await send_mars_to_dom(result);
             console.log(result)
+            await send_mars_to_dom(result);
         });
+
+        document.getElementById('mars2').addEventListener('click', async function() {
+            const api_key = 'ZeizpwbDU72HCvWDQZdMOT19VqBKna3sMUbYmQn9';
+            const result = await getMarsLastPicture2(api_key);
+            console.log(result)
+            await send_mars_to_dom2(result);
+        });
+
+        document.getElementById('who').addEventListener('click', async function(){
+            const result = await whoIsInSpace()
+            await people_space_to_dom(result)
+        })
 
         function randomDate(start, end) {
             return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
@@ -113,9 +162,22 @@
             return await resp.json()
         }
 
+        async function getMarsLastPicture2(key){
+                    const resp = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/latest_photos?camera=mcz_left&api_key='+key);
+                    return await resp.json()
+        };
+
+
+        async function whoIsInSpace(){
+            const resp = await fetch('http://api.open-notify.org/astros.json')
+            return await resp.json();
+        }
+
         async function send_to_dom(data){
             document.getElementById('card').style.display = 'flex';
             document.getElementById('mars-card').style.display = 'none';
+            document.getElementById('mars-card-2').style.display = 'none';
+            document.getElementById('who_in_space').style.display = 'none';
             document.getElementById('title').innerHTML = data.title;
             document.getElementById('date').innerHTML = data.date;
             document.getElementById('img').src = data.url;
@@ -125,9 +187,36 @@
         async function send_mars_to_dom(data){
             document.getElementById('card').style.display = 'none';
             document.getElementById('mars-card').style.display = 'flex';
-            document.getElementById('mars-img').src = data.photos[0].img_src;
-            document.getElementById('camera').innerHTML = data.photos[0].camera.full_name;
-            document.getElementById('mars-date').innerHTML = data.photos[0].earth_date;
+            document.getElementById('mars-card-2').style.display = 'none';
+            document.getElementById('who_in_space').style.display = 'none';
+            for (i=0; i < 10; i++)
+                document.getElementById('picture-list').innerHTML += 
+                '<div class="col-md-6 d-flex justify-content-center align-items-center"><p>Picture token the '+data.photos[i].earth_date+'</p></div><div class="col-md-6 d-flex justify-content-center align-items-center mb-5"><img id="mars-img" src="'+data.photos[i].img_src+'" class="img-fluid"></div>'
+        }
+
+        async function send_mars_to_dom2(data){
+            document.getElementById('card').style.display = 'none';
+            document.getElementById('mars-card').style.display = 'none';
+            document.getElementById('mars-card-2').style.display = 'flex';
+            document.getElementById('who_in_space').style.display = 'none';
+            for (i=0; i < 10; i++)
+                document.getElementById('picture-list-2').innerHTML += 
+                '<div class="col-md-6 d-flex justify-content-center align-items-center"><p>Picture token the '+data.latest_photos[i].earth_date+'</p></div><div class="col-md-6 d-flex justify-content-center align-items-center mb-5"><img id="mars-img" src="'+data.latest_photos[i].img_src+'" class="img-fluid"></div>'
+            }
+
+        async function people_space_to_dom(data){
+            document.getElementById('card').style.display = 'none';
+            document.getElementById('mars-card').style.display = 'none';
+            document.getElementById('mars-card-2').style.display = 'none';
+            document.getElementById('who_in_space').style.display = 'block';
+            document.getElementById('number_in_space').innerHTML = data.number;
+
+            for (let i = 0; i < data.people.length; i++ ){
+                i += 1
+                document.getElementById('table-body').innerHTML += 
+                    '<tr><th scope="row">'+ i +'</th><td>'+data.people[i-1].name+'</td><td>'+data.people[i-1].craft+'</td></tr>'
+                i -= 1
+            }
 
         }
     </script>
