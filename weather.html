@@ -79,7 +79,6 @@
             }
 
             async function getData(data){
-                console.log(data)
                 final_data = []
                 final_data.city = data.name
                 final_data.weather_desc = data.weather[0].description
@@ -92,8 +91,6 @@
                 final_data.sunset = sunset_time.getHours() + ':' + sunset_time.getMinutes();
                 final_data.icon = 'https://openweathermap.org/img/wn/'+data.weather[0].icon +'@2x.png'
                 final_data.humidity = data.main.humidity
-
-                console.log(final_data)
                 return final_data
             }
 

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="icon" type="image/png" href="img/code.png"/>
+    <title>Webcams of the world</title>
+</head>
+<style>
+    body{
+        background: linear-gradient(45deg, #FFDEE9 0%, #B5FFFC 100%);
+        color: #818181;
+;
+    }
+
+    p, h1, label, output, button{
+        font-weight: bold;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    }
+</style>
+<body>
+    <div class="container">
+        <a class="btn btn-outline-dark mt-2" href="index.html#portfolio">RETOUR CV ALEXIS C</a>
+        <h1 class="m-5 text-center">Webcams of the world !</h1>
+        <div class="d-flex justify-content-center align-items-center flex-column m-5">
+            <label class="form-label" for="city">Enter the city you are looking for : </label>
+            <input class="form-control mb-5" type="text" name="city" id="city">
+        
+            <label class="form-label" for="radius" class="form-label font-weight-bold">Radius in Km : </label>
+            <input type="range" class="form-range w-25" value="10" min="0" max="100" id="radius" oninput="this.nextElementSibling.value = this.value">
+            <output class="mb-5">10</output>
+        
+            <button id="search" class="btn btn-outline-dark btn-lg">search</button>
+        </div>
+        <div id="card" class="row m-5">
+
+        </div>
+    </div>
+
+
+
+    <div>
+
+    </div>
+    
+    <script>
+        const api_key ='Pkpga758VGnDkbrcp2mtGMjfSYfMRFCN';
+
+        document.getElementById('search').addEventListener('click', async function(){
+            const city = document.getElementById('city').value
+            const radius = document.getElementById('radius').value
+            const geo_data = await getGeoData(city)
+            const result = await getWebcamsIdList(geo_data[0].lat, geo_data[0].lon, radius)
+            const result_filtered = await filterResult(result);
+            await sendWebcamsDataToDoma(result_filtered);
+        })
+
+        async function getWebcamsIdList(lat, lon, radius){
+            const resp = await fetch("https://api.windy.com/api/webcams/v2/list/orderby=popularity,desc/nearby="+lat+","+lon+","+radius+"?show=webcams:location,image,timelapse&lang=fr&key=" + api_key);
+            return await resp.json()
+        }
+
+        async function getGeoData(city){
+            const resp = await fetch('https://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=f7def7301ab600d6be693a348978f467');
+            return await resp.json()
+        }
+
+        async function filterResult(data){
+            let final = []; 
+            for (i=0; i < data.result.webcams.length; i++){
+                let filtered_data = {}
+                filtered_data.city = data.result.webcams[i].location.city;
+                filtered_data.region = data.result.webcams[i].location.region;
+                filtered_data.country = data.result.webcams[i].location.country;
+                if (data.result.webcams[i].timelapse.live.available == false){
+                    filtered_data.timelapse = data.result.webcams[i].timelapse.day.embed;
+                    filtered_data.live= false
+                } else {
+                    filtered_data.timelapse = data.result.webcams[i].timelapse.live.embed;
+                    filtered_data.live = true
+                }
+                final.push(filtered_data);
+            }
+            return final;
+        }
+
+        async function sendWebcamsDataToDoma(result){
+            document.getElementById('card').innerHTML = ""
+            for (i=0; i<result.length; i++){
+                document.getElementById('card').innerHTML +=  '<div class="col-md-6 d-flex flex-column justify-content-center align-items-center my-5"><h2 class="text-center"><strong>'+result[i].city+'</strong> - '+result[i].region+', '+result[i].country+'</h2><div class="embed-responsive"><iframe src="'+result[i].timelapse+'" title="player for '+result[i].city+'" height="auto" width="400" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="embed-responsive-item"></iframe></div><h3 id="live" style="color: red;"></h3></div>'    
+                if (result.live == true ){
+                    document.getElementById('live').innerHTML = "Live !"
+                }
+            }
+        }
+    </script>
+</body>
+</html>

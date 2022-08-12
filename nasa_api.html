@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="img/code.png"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Nasa facts</title>
+    <title>Explore the SPACE</title>
 </head>
 <style>
     body{
@@ -30,8 +30,8 @@
             <h2 class="mb-5 font-weight-bold">NASA</h2>
             <div class="d-flex justify-content-center flex-wrap">
 
-                <button  class="btn btn-outline-light m-3" id="mars">Mars last pictures <br> - PERSEVERANCE -</button>  
-                <button  class="btn btn-outline-light m-3" id="mars2">Mars's last pictures<br> - CURIOSITY -</button>
+                <button  class="btn btn-outline-light m-3" id="mars2">Mars last pictures <br> - PERSEVERANCE -</button>  
+                <button  class="btn btn-outline-light m-3" id="mars">Mars's last pictures<br> - CURIOSITY -</button>
                 <button class="btn btn-outline-light m-3" id="today">Today's fact</button>
                 <button  class="btn btn-outline-light m-3" id="random">Random fact</button>
                 <button  class="btn btn-outline-light m-3" id="who">Who's in space ?</button>   
@@ -111,7 +111,6 @@
             let today = new Date();
             let date = today.toISOString().split('T')[0];
             const result = await getPictureNasa(date, api_key);
-            console.log(result);
             await send_to_dom(result)
         });
 
@@ -121,21 +120,18 @@
             const random_date = randomDate(new Date(2010, 0, 1), new Date())
             let date = random_date.toISOString().split('T')[0];
             const result = await getPictureNasa(date, api_key);
-            console.log(result);
             await send_to_dom(result)
         });
 
         document.getElementById('mars').addEventListener('click', async function() {
             const api_key = 'ZeizpwbDU72HCvWDQZdMOT19VqBKna3sMUbYmQn9';
             const result = await getMarsLastPicture(api_key);
-            console.log(result)
             await send_mars_to_dom(result);
         });
 
         document.getElementById('mars2').addEventListener('click', async function() {
             const api_key = 'ZeizpwbDU72HCvWDQZdMOT19VqBKna3sMUbYmQn9';
             const result = await getMarsLastPicture2(api_key);
-            console.log(result)
             await send_mars_to_dom2(result);
         });
 
@@ -157,8 +153,7 @@
             const date = new Date();
             date.setDate(date.getDate() - 5);
             let last_week = date.toISOString().split('T')[0];
-            console.log(last_week)
-            const resp = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=' + last_week + '&camera=navcam&api_key='+key)        
+            const resp = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?camera=navcam&api_key='+key)        
             return await resp.json()
         }
 
@@ -191,7 +186,7 @@
             document.getElementById('who_in_space').style.display = 'none';
             for (i=0; i < 10; i++)
                 document.getElementById('picture-list').innerHTML += 
-                '<div class="col-md-6 d-flex justify-content-center align-items-center"><p>Picture token the '+data.photos[i].earth_date+'</p></div><div class="col-md-6 d-flex justify-content-center align-items-center mb-5"><img id="mars-img" src="'+data.photos[i].img_src+'" class="img-fluid"></div>'
+                '<div class="col-md-6 d-flex justify-content-center align-items-center"><p>Picture token the '+data.latest_photos[i].earth_date+'</p></div><div class="col-md-6 d-flex justify-content-center align-items-center mb-5"><img id="mars-img" src="'+data.latest_photos[i].img_src+'" class="img-fluid"></div>'
         }
 
         async function send_mars_to_dom2(data){
