@@ -256,6 +256,9 @@ font-size: 6em;
     .logo{
         font-size: 1.5em;
     }
+    .font-smaller{
+        font-size: 100%;
+    }
 }
 
 
