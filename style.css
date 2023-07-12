@@ -52,7 +52,7 @@ header{
     font-size: 2rem;
 }
 
-.fa-cart-arrow-down:hover{
+.fa-cart-arrow-down:hover, .skills-list ul i:hover{
     color: #fffc5b;
 }
 
