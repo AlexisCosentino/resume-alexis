@@ -27,8 +27,15 @@
             <p class="text-center mb-5">Calculez le nombre de RTT par an pour les cadres au forfait jour</p>
             <h2></h2>
             <form class="mt-5 d-flex justify-content-center align-items-center flex-column">
-                <label class="form-label" for="city">Année :</label>
-                <input class="form-control w-100" id="city" type="number" value="2023" min="2000" max="2050"/>
+                <label class="form-label" for="year">Année :</label>
+                <input class="form-control w-100 mb-3" id="year" type="number" value="2023" min="2000" max="2050"/>
+
+                <label class="form-label" for="days">Nombre de jours travaillé max :</label>
+                <input class="form-control w-100 mb-3" id="days" type="number" value="218" min="150" max="218"/>
+
+
+                <label class="form-label" for="cp">Nombre de jours CP :</label>
+                <input class="form-control w-100 mb-3" id="cp" type="number" value="25" min="20" max="40"/>
 
                 <button class='btn btn-outline-light mt-3' type="button" id="submit">OK</button>
             </form>
@@ -60,7 +67,46 @@
 
 
         document.getElementById('submit').addEventListener('click', async function() {
-            const q = document.getElementById('city').value
+            const year = document.getElementById('year').value
+            const cp = document.getElementById('cp').value
+            const max = document.getElementById('days').value
+
+            const begin = new Date(year, 1, 1)
+            const end = new Date(year, 12, 31)
+
+            const holidays = await getHolidays(year)
+            console.log(begin, end)
+            let total_days = 0
+            let week_end_days = 0
+            let holidays_in_week_days = 0
+
+            while( begin <= end){
+                total_days += 1
+                if(begin.getDay() == 0 ||begin.getDay() == 6){
+                    week_end_days += 1
+                }
+                holidays.forEach(element => {
+                    if( element == begin )
+                        holidays_in_week_days += 1
+                }); 
+                begin.setDate(begin.getDate() + 1);
+            }
+
+            console.log("total : "+ total_days +" , jour WE: "+ week_end_days +" , jour férié semaine: "+ holidays_in_week_days +" ")
+
+
+            async function getHolidays(year){
+                const resp = await fetch('https://calendrier.api.gouv.fr/jours-feries/metropole/'+ year +'.json')
+                const holidays = []
+                const json = await resp.json()
+                console.log(json)
+                const dates = Object.keys(json);
+                for (let i = 0; i < dates.length; i++) {
+                    holidays.push(new Date(Date.parse(dates[i]))); // Ajouter chaque date dans le tableau dateArray
+                }
+                console.log(holidays);
+                return holidays
+            }
 
             const sendData =  await getCity(q)
             const result = await getWeatherData(sendData[0].lat, sendData[0].lon)
@@ -129,7 +175,7 @@
             }
         })
 
-    document.getElementById('city').addEventListener("keypress", function(event) {
+    document.getElementById('year').addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             event.preventDefault();
             document.getElementById("submit").click();
