@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="icon" type="image/png" href="img/code.png"/>
+    <title>RTT Simulateur</title>
+</head>
+<style>
+    body{
+        color: white;
+        background: linear-gradient(47deg, rgba(65,88,208,1) 0%, rgba(200,80,192,1) 46%, rgba(255,204,112,1) 100%);
+        height: 100vh;
+    }
+    #result{
+        box-shadow: rgba(255, 255, 255, 0.462) 0px 3px 12px;
+        border-radius: 15px;
+    }
+</style>
+<body id="body">
+    <div class="container">
+        <a class="btn btn-outline-light mt-2" href="index.html#portfolio">RETOUR CV ALEXIS C</a>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <h1 class="text-center">Calculateur de RTT</h1>
+            <p class="text-center mb-5">Calculez le nombre de RTT par an pour les cadres au forfait jour</p>
+            <h2></h2>
+            <form class="mt-5 d-flex justify-content-center align-items-center flex-column">
+                <label class="form-label" for="city">Année :</label>
+                <input class="form-control w-100" id="city" type="number" value="2023" min="2000" max="2050"/>
+
+                <button class='btn btn-outline-light mt-3' type="button" id="submit">OK</button>
+            </form>
+
+
+            <div style="display:none" id="result" class="mt-5 w-75">
+                    <div class="col-5 p-3">
+                        <h2 id="city_name"></h2>
+                        <h4 id="weather"></h4>
+                        <div class="text-center">
+                            <img id='icon' alt="icon" height="150" src="">
+                        </div>
+                    </div>
+                    <div class="col-7 d-flex justify-content-center flex-column">
+                        <h5><span id="temp"></span> °C</h5>
+                        <h5><span id="humid"></span>% d'humidité</h5>
+                        <h5><img src="img/wind.png" alt="wind" height="30px" class="mr-2"><span id="wind"></span></h5>
+                        <h5><img src="img/sunrise.png" height="30px" class="mr-2"><span id="sunrise"></span></h5>
+                        <h5><img src="img/sunset.png" height="30px" class="mr-2"><span id="sunset"></span></h5>
+                    </div>
+            </div>
+        </div>
+
+
+    </div>    
+    
+    <script>
+        const api_key = 'f7def7301ab600d6be693a348978f467';
+
+
+        document.getElementById('submit').addEventListener('click', async function() {
+            const q = document.getElementById('city').value
+
+            const sendData =  await getCity(q)
+            const result = await getWeatherData(sendData[0].lat, sendData[0].lon)
+            const data = await getData(result)
+            await send_to_dom(data)
+            await get_background_color(result.weather[0].icon)
+
+
+            async function getCity(city){
+                const resp = await fetch('https://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=' + api_key);
+                return await resp.json()
+            }
+
+            async function getWeatherData(lat, lon){
+                const response = await fetch('https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&lang=fr&units=metric&appid='+api_key);
+                return await response.json();
+            }
+
+            async function getData(data){
+                final_data = []
+                final_data.city = data.name
+                final_data.weather_desc = data.weather[0].description
+                final_data.temp = data.main.temp
+                final_data.wind = data.wind.speed + ' Km/h'
+
+                sunrise_time = new Date (data.sys.sunrise * 1000);
+                sunset_time = new Date (data.sys.sunset * 1000);
+                final_data.sunrise = sunrise_time.getHours() + ':' + sunrise_time.getMinutes();
+                final_data.sunset = sunset_time.getHours() + ':' + sunset_time.getMinutes();
+                final_data.icon = 'https://openweathermap.org/img/wn/'+data.weather[0].icon +'@2x.png'
+                final_data.humidity = data.main.humidity
+                return final_data
+            }
+
+            async function send_to_dom(data){
+                document.getElementById('result').style.display = "flex";
+                document.getElementById('city_name').innerHTML = data.city;
+                document.getElementById('weather').innerHTML = data.weather_desc;
+                document.getElementById('temp').innerHTML = data.temp;
+                document.getElementById('wind').innerHTML = data.wind;
+                document.getElementById('sunrise').innerHTML = data.sunrise;
+                document.getElementById('sunset').innerHTML = data.sunset;
+                document.getElementById('icon').src = data.icon;
+                document.getElementById('humid').innerHTML = data.humidity;
+            }
+
+            async function get_background_color(icon){
+                console.log(icon)
+                if (icon == '01d' || icon == '01n'){
+                    document.body.style.background = "radial-gradient(circle, rgba(255,104,104,1) 0%, rgba(255,194,150,1) 100%)";
+                } else if (icon == '02d' || icon == '02n'){
+                    document.getElementById('body').style.background = "radial-gradient(circle, rgba(212,212,212,1) 0%, rgba(255,104,104,1) 100%)";
+                } else if (icon == '03d' || icon == '03n'){
+                    document.getElementById('body').style.background = "radial-gradient(circle, rgba(202,202,202,1) 0%, rgba(126,126,126,1) 100%)";
+                } else if (icon == '04d' || icon == '04n'){
+                    document.getElementById('body').style.background = "radial-gradient(circle, rgba(156,156,156,1) 0%, rgba(52,52,52,1) 100%)";
+                } else if (icon == '09d' || icon == '09n'){
+                    document.getElementById('body').style.background = "radial-gradient(circle, rgba(135,212,255,1) 0%, rgba(94,94,94,1) 100%)";
+                } else if (icon == '10d' || icon == '10n'){
+                    document.getElementById('body').style.background = "linear-gradient(90deg, rgba(123,183,255,1) 0%, rgba(255,212,132,1) 100%)";
+                } else if (icon == '11d' || icon == '11n'){
+                    document.getElementById('body').style.background = "linear-gradient(90deg, rgba(78,78,78,1) 0%, rgba(253,255,150,1) 100%)";
+                } else if (icon == '13d' || icon == '13n'){
+                    document.getElementById('body').style.background = "linear-gradient(90deg, rgba(158,158,158,1) 0%, rgba(150,255,243,1) 100%)";
+                } 
+            }
+        })
+
+    document.getElementById('city').addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("submit").click();
+            }
+        });
+
+    </script>
+</body>
+</html>
