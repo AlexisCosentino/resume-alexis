@@ -7,26 +7,93 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="icon" type="image/png" href="img/code.png"/>
     <title>RTT Simulateur</title>
+    <title>Calcul des jours de RTT pour les cadres au forfait jour </title>
+    <meta name="description" content="Calculez vos jours de RTT en fonction du nombre de jours travaillés maximum. Obtenez un aperçu de vos droits en matière de RTT en fonction de votre situation professionnelle.">
+    <meta name="keywords" content="RTT, jours de RTT, jours de repos, calcul RTT, nombre de jours travaillés, droit aux RTT">
+    <meta name="author" content="Alexis COSENTINO">
 </head>
 <style>
-    body{
-        color: white;
-        background: linear-gradient(47deg, rgba(65,88,208,1) 0%, rgba(200,80,192,1) 46%, rgba(255,204,112,1) 100%);
-        height: 100vh;
+        :root {
+  --gradient_bg_color: #006dca;
+
+  --gradient_spot1_color: #001a39;
+  --gradient_spot1_w: 75vw;
+  --gradient_spot1_h: 75vh;
+  --gradient_spot1_x: 0;
+  --gradient_spot1_y: 0;
+
+  --gradient_spot2_color: #9b70ff;
+  --gradient_spot2_w: 75vw;
+  --gradient_spot2_h: 75vh;
+  --gradient_spot2_x: 100%;
+  --gradient_spot2_y: 0;
+
+  --gradient_spot3_color: #42ffc6;
+  --gradient_spot3_w: 75vw;
+  --gradient_spot3_h: 75vh;
+  --gradient_spot3_x: 100%;
+  --gradient_spot3_y: 100%;
+
+  --gradient_spot4_color: #ff3b8d;
+  --gradient_spot4_w: 75vw;
+  --gradient_spot4_h: 75vh;
+  --gradient_spot4_x: 0;
+  --gradient_spot4_y: 100%;
+}
+
+
+/** Background gradient color, using var from root **/
+
+body{
+    background-color: var(--gradient_bg_color);
+    background-image: radial-gradient(
+        var(--gradient_spot1_w) var(--gradient_spot1_h) at left
+            var(--gradient_spot1_x) top var(--gradient_spot1_y),
+        var(--gradient_spot1_color),
+        transparent
+        ),
+        radial-gradient(
+        var(--gradient_spot2_w) var(--gradient_spot2_h) at left
+            var(--gradient_spot2_x) top var(--gradient_spot2_y),
+        var(--gradient_spot2_color),
+        transparent
+        ),
+        radial-gradient(
+        var(--gradient_spot3_w) var(--gradient_spot3_h) at left
+            var(--gradient_spot3_x) top var(--gradient_spot3_y),
+        var(--gradient_spot3_color),
+        transparent
+        ),
+        radial-gradient(
+        var(--gradient_spot4_w) var(--gradient_spot4_h) at left
+            var(--gradient_spot4_x) top var(--gradient_spot4_y),
+        var(--gradient_spot4_color),
+        transparent
+        );
+    background-attachment: fixed;
+    margin: 0;
+    overflow-x: hidden;
+    color : white
     }
-    #result{
-        box-shadow: rgba(255, 255, 255, 0.462) 0px 3px 12px;
-        border-radius: 15px;
+
+
+    #card{
+        background: rgba( 255, 255, 255, 0.3 );
+        -webkit-box-shadow: 3px 3px 50px 27px rgba(102,102,102,0.56); 
+box-shadow: 3px 3px 50px 27px rgba(255, 231, 251, 0.56);        backdrop-filter: blur( 12px );
+        -webkit-backdrop-filter: blur( 12px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        padding: 50px 100px;
     }
 </style>
 <body id="body">
     <div class="container">
         <a class="btn btn-outline-light mt-2" href="index.html#portfolio">RETOUR CV ALEXIS C</a>
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <h1 class="text-center">Calculateur de RTT</h1>
-            <p class="text-center mb-5">Calculez le nombre de RTT par an pour les cadres au forfait jour</p>
-            <h2></h2>
-            <form class="mt-5 d-flex justify-content-center align-items-center flex-column">
+            <h1>Calculateur de RTT pour cadre au forfait jour</h1>
+
+            <form class="my-5 d-flex justify-content-center align-items-center flex-column" id="card">
                 <label class="form-label" for="year">Année :</label>
                 <input class="form-control w-100 mb-3" id="year" type="number" value="2023" min="2000" max="2050"/>
 
@@ -39,24 +106,21 @@
 
                 <button class='btn btn-outline-light mt-3' type="button" id="submit">OK</button>
             </form>
-
-
-            <div style="display:none" id="result" class="mt-5 w-75">
-                    <div class="col-5 p-3">
-                        <h2 id="city_name"></h2>
-                        <h4 id="weather"></h4>
-                        <div class="text-center">
-                            <img id='icon' alt="icon" height="150" src="">
-                        </div>
-                    </div>
-                    <div class="col-7 d-flex justify-content-center flex-column">
-                        <h5><span id="temp"></span> °C</h5>
-                        <h5><span id="humid"></span>% d'humidité</h5>
-                        <h5><img src="img/wind.png" alt="wind" height="30px" class="mr-2"><span id="wind"></span></h5>
-                        <h5><img src="img/sunrise.png" height="30px" class="mr-2"><span id="sunrise"></span></h5>
-                        <h5><img src="img/sunset.png" height="30px" class="mr-2"><span id="sunset"></span></h5>
-                    </div>
-            </div>
+  
+            <h2>Qu'est-ce que le calcul des jours de RTT ?</h2>
+            <p>Le calcul des jours de RTT vous permet de déterminer le nombre de jours de repos supplémentaires auxquels vous avez droit en fonction du nombre de jours travaillés maximum par an.</p>
+            
+            <h2>Comment fonctionne le calcul des jours de RTT ?</h2>
+            <p>Le calcul des jours de RTT se base sur plusieurs facteurs, tels que le nombre de jours travaillés maximum par an, le nombre de week-ends, les jours fériés, les congés, etc. Notre outil de calcul prend en compte ces éléments pour estimer votre droit aux jours de RTT.</p>
+            
+            <h2>Utilisez notre calculateur de jours de RTT</h2>
+            <p>Utilisez notre calculateur en ligne pour obtenir un aperçu précis de vos droits en matière de RTT. Remplissez les informations requises, telles que le nombre de jours travaillés maximum, le nombre de week-ends par an, et découvrez combien de jours de RTT vous pouvez potentiellement accumuler.</p>
+            
+            <h2>Pourquoi est-il important de connaître ses jours de RTT ?</h2>
+            <p>Connaître vos jours de RTT vous permet de mieux planifier votre temps de repos et de concilier votre vie professionnelle et personnelle. Cela vous aide à organiser vos congés et à profiter pleinement de vos jours de repos supplémentaires.</p>
+            <h1 class="text-center">Calculateur de RTT</h1>
+            <p class="text-center mb-5">Calculez le nombre de RTT par an pour les cadres au forfait jour</p>
+            <h2></h2>
         </div>
 
 
@@ -71,8 +135,8 @@
             const cp = document.getElementById('cp').value
             const max = document.getElementById('days').value
 
-            const begin = new Date(year, 1, 1)
-            const end = new Date(year, 12, 31)
+            const begin = new Date(year, 0, 1)
+            const end = new Date(year, 11, 31)
 
             const holidays = await getHolidays(year)
             console.log(begin, end)
@@ -84,16 +148,32 @@
                 total_days += 1
                 if(begin.getDay() == 0 ||begin.getDay() == 6){
                     week_end_days += 1
+                } else {
+                    holidays.forEach(element => {
+                        if( element.setHours(0,0,0,0) == begin.setHours(0,0,0,0))
+                            holidays_in_week_days += 1
+                    }); 
                 }
-                holidays.forEach(element => {
-                    if( element == begin )
-                        holidays_in_week_days += 1
-                }); 
+                
                 begin.setDate(begin.getDate() + 1);
+                
             }
 
             console.log("total : "+ total_days +" , jour WE: "+ week_end_days +" , jour férié semaine: "+ holidays_in_week_days +" ")
+            let RTT = total_days - max - cp - week_end_days - holidays_in_week_days
+            console.log("RTT = " + RTT )
 
+
+            const cardDiv = document.getElementById("card");
+
+            // Créer un nouvel élément h1
+            const heading = document.createElement("h2");
+
+            // Ajouter du contenu au nouvel élément h1
+            heading.textContent = "En " + year + " vous aurez " + RTT + " jours de RTT ! U+1F610" ;
+
+            // Ajouter l'élément h1 à la fin de la div "card"
+            cardDiv.appendChild(heading);
 
             async function getHolidays(year){
                 const resp = await fetch('https://calendrier.api.gouv.fr/jours-feries/metropole/'+ year +'.json')
@@ -107,72 +187,6 @@
                 console.log(holidays);
                 return holidays
             }
-
-            const sendData =  await getCity(q)
-            const result = await getWeatherData(sendData[0].lat, sendData[0].lon)
-            const data = await getData(result)
-            await send_to_dom(data)
-            await get_background_color(result.weather[0].icon)
-
-
-            async function getCity(city){
-                const resp = await fetch('https://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=' + api_key);
-                return await resp.json()
-            }
-
-            async function getWeatherData(lat, lon){
-                const response = await fetch('https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&lang=fr&units=metric&appid='+api_key);
-                return await response.json();
-            }
-
-            async function getData(data){
-                final_data = []
-                final_data.city = data.name
-                final_data.weather_desc = data.weather[0].description
-                final_data.temp = data.main.temp
-                final_data.wind = data.wind.speed + ' Km/h'
-
-                sunrise_time = new Date (data.sys.sunrise * 1000);
-                sunset_time = new Date (data.sys.sunset * 1000);
-                final_data.sunrise = sunrise_time.getHours() + ':' + sunrise_time.getMinutes();
-                final_data.sunset = sunset_time.getHours() + ':' + sunset_time.getMinutes();
-                final_data.icon = 'https://openweathermap.org/img/wn/'+data.weather[0].icon +'@2x.png'
-                final_data.humidity = data.main.humidity
-                return final_data
-            }
-
-            async function send_to_dom(data){
-                document.getElementById('result').style.display = "flex";
-                document.getElementById('city_name').innerHTML = data.city;
-                document.getElementById('weather').innerHTML = data.weather_desc;
-                document.getElementById('temp').innerHTML = data.temp;
-                document.getElementById('wind').innerHTML = data.wind;
-                document.getElementById('sunrise').innerHTML = data.sunrise;
-                document.getElementById('sunset').innerHTML = data.sunset;
-                document.getElementById('icon').src = data.icon;
-                document.getElementById('humid').innerHTML = data.humidity;
-            }
-
-            async function get_background_color(icon){
-                console.log(icon)
-                if (icon == '01d' || icon == '01n'){
-                    document.body.style.background = "radial-gradient(circle, rgba(255,104,104,1) 0%, rgba(255,194,150,1) 100%)";
-                } else if (icon == '02d' || icon == '02n'){
-                    document.getElementById('body').style.background = "radial-gradient(circle, rgba(212,212,212,1) 0%, rgba(255,104,104,1) 100%)";
-                } else if (icon == '03d' || icon == '03n'){
-                    document.getElementById('body').style.background = "radial-gradient(circle, rgba(202,202,202,1) 0%, rgba(126,126,126,1) 100%)";
-                } else if (icon == '04d' || icon == '04n'){
-                    document.getElementById('body').style.background = "radial-gradient(circle, rgba(156,156,156,1) 0%, rgba(52,52,52,1) 100%)";
-                } else if (icon == '09d' || icon == '09n'){
-                    document.getElementById('body').style.background = "radial-gradient(circle, rgba(135,212,255,1) 0%, rgba(94,94,94,1) 100%)";
-                } else if (icon == '10d' || icon == '10n'){
-                    document.getElementById('body').style.background = "linear-gradient(90deg, rgba(123,183,255,1) 0%, rgba(255,212,132,1) 100%)";
-                } else if (icon == '11d' || icon == '11n'){
-                    document.getElementById('body').style.background = "linear-gradient(90deg, rgba(78,78,78,1) 0%, rgba(253,255,150,1) 100%)";
-                } else if (icon == '13d' || icon == '13n'){
-                    document.getElementById('body').style.background = "linear-gradient(90deg, rgba(158,158,158,1) 0%, rgba(150,255,243,1) 100%)";
-                } 
-            }
         })
 
     document.getElementById('year').addEventListener("keypress", function(event) {
@@ -181,6 +195,20 @@
             document.getElementById("submit").click();
             }
         });
+
+    document.getElementById('cp').addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("submit").click();
+        }
+    });
+
+    document.getElementById('max').addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("submit").click();
+        }
+    });
 
     </script>
 </body>
