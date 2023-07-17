@@ -181,10 +181,19 @@ box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter:
             const result2 = document.getElementById("result2");
 
             console.log(today.getFullYear())
+
             if(today.getFullYear() <= year){
-                result.textContent = "En " + year + " vous aurez " + RTT + " jours de RTT !" ;
+                if (RTT <= 0){
+                    result.textContent = "En " + year + " vous n'aurez pas de RTT !"
+                } else {
+                    result.textContent = "En " + year + " vous aurez " + RTT + " jours de RTT !" ;
+                }
             } else {
-                result.textContent = "En " + year + " vous avez eu " + RTT + " jours de RTT !" ;
+                if (RTT <= 0){
+                    result.textContent = "En " + year + " vous n'avez pas eu de RTT !"
+                } else {
+                    result.textContent = "En " + year + " vous avez eu " + RTT + " jours de RTT !" ;
+                }
             }
             result2.textContent = total_days + " jours en " + year + ", " + week_end_days + " jours de week-end et " + holidays_in_week_days + " jours fériés en semaine."
 
