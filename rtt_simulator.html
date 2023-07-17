@@ -73,25 +73,39 @@ body{
     background-attachment: fixed;
     margin: 0;
     overflow-x: hidden;
-    color : white
+    color : white;
+    min-height: 100vh;
     }
 
 
     #card{
         background: rgba( 255, 255, 255, 0.3 );
-        -webkit-box-shadow: 3px 3px 50px 27px rgba(102,102,102,0.56); 
-box-shadow: 3px 3px 50px 27px rgba(255, 231, 251, 0.56);        backdrop-filter: blur( 12px );
+        -webkit-box-shadow: 3px 3px 50px 10px rgba(102,102,102,0.56); 
+box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter: blur( 12px );
         -webkit-backdrop-filter: blur( 12px );
         border-radius: 10px;
         border: 1px solid rgba( 255, 255, 255, 0.18 );
         padding: 50px 100px;
     }
+
+    input{
+        font-size: xx-large !important;
+        text-align: center;
+    }
+
+    .copyrights{
+        background-color: rgb(15, 15, 15);
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
 </style>
 <body id="body">
     <div class="container">
-        <a class="btn btn-outline-light mt-2" href="index.html#portfolio">RETOUR CV ALEXIS C</a>
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <h1>Calculateur de RTT pour cadre au forfait jour</h1>
+            <h1 class="mt-3">Calculateur de RTT pour cadre au forfait jour</h1>
 
             <form class="my-5 d-flex justify-content-center align-items-center flex-column" id="card">
                 <label class="form-label" for="year">Année :</label>
@@ -106,26 +120,14 @@ box-shadow: 3px 3px 50px 27px rgba(255, 231, 251, 0.56);        backdrop-filter:
 
                 <button class='btn btn-outline-light mt-3' type="button" id="submit">OK</button>
             </form>
-  
-            <h2>Qu'est-ce que le calcul des jours de RTT ?</h2>
-            <p>Le calcul des jours de RTT vous permet de déterminer le nombre de jours de repos supplémentaires auxquels vous avez droit en fonction du nombre de jours travaillés maximum par an.</p>
-            
-            <h2>Comment fonctionne le calcul des jours de RTT ?</h2>
-            <p>Le calcul des jours de RTT se base sur plusieurs facteurs, tels que le nombre de jours travaillés maximum par an, le nombre de week-ends, les jours fériés, les congés, etc. Notre outil de calcul prend en compte ces éléments pour estimer votre droit aux jours de RTT.</p>
-            
-            <h2>Utilisez notre calculateur de jours de RTT</h2>
-            <p>Utilisez notre calculateur en ligne pour obtenir un aperçu précis de vos droits en matière de RTT. Remplissez les informations requises, telles que le nombre de jours travaillés maximum, le nombre de week-ends par an, et découvrez combien de jours de RTT vous pouvez potentiellement accumuler.</p>
-            
-            <h2>Pourquoi est-il important de connaître ses jours de RTT ?</h2>
-            <p>Connaître vos jours de RTT vous permet de mieux planifier votre temps de repos et de concilier votre vie professionnelle et personnelle. Cela vous aide à organiser vos congés et à profiter pleinement de vos jours de repos supplémentaires.</p>
-            <h1 class="text-center">Calculateur de RTT</h1>
-            <p class="text-center mb-5">Calculez le nombre de RTT par an pour les cadres au forfait jour</p>
-            <h2></h2>
+            <h2 class="text-center m-5" id="result"></h2>
         </div>
-
-
     </div>    
-    
+    <section class="copyrights">
+        <p class="text-center pt-2 pb-2 mb-0">Copyrights © Tous droits réservés | <a href="index.html" target="_blank" style="color: white;">Alexis Cosentino</a></p>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+
     <script>
         const api_key = 'f7def7301ab600d6be693a348978f467';
 
@@ -139,7 +141,6 @@ box-shadow: 3px 3px 50px 27px rgba(255, 231, 251, 0.56);        backdrop-filter:
             const end = new Date(year, 11, 31)
 
             const holidays = await getHolidays(year)
-            console.log(begin, end)
             let total_days = 0
             let week_end_days = 0
             let holidays_in_week_days = 0
@@ -159,32 +160,33 @@ box-shadow: 3px 3px 50px 27px rgba(255, 231, 251, 0.56);        backdrop-filter:
                 
             }
 
-            console.log("total : "+ total_days +" , jour WE: "+ week_end_days +" , jour férié semaine: "+ holidays_in_week_days +" ")
             let RTT = total_days - max - cp - week_end_days - holidays_in_week_days
-            console.log("RTT = " + RTT )
 
 
-            const cardDiv = document.getElementById("card");
+            const result = document.getElementById("result");
+            const jsConfetti = new JSConfetti()
+            jsConfetti.addConfetti({
+                confettiRadius: 6,
+                confettiNumber: 600,
+                confettiColors: [
+                            '#006dca', '#001a39', '#9b70ff', '#42ffc6', '#ff3b8d', '#FFFFFF'
+                                ],
+            })
+            
 
             // Créer un nouvel élément h1
             const heading = document.createElement("h2");
-
             // Ajouter du contenu au nouvel élément h1
-            heading.textContent = "En " + year + " vous aurez " + RTT + " jours de RTT ! U+1F610" ;
-
-            // Ajouter l'élément h1 à la fin de la div "card"
-            cardDiv.appendChild(heading);
+            result.textContent = "En " + year + " vous aurez " + RTT + " jours de RTT ! U+1F610" ;
 
             async function getHolidays(year){
                 const resp = await fetch('https://calendrier.api.gouv.fr/jours-feries/metropole/'+ year +'.json')
                 const holidays = []
                 const json = await resp.json()
-                console.log(json)
                 const dates = Object.keys(json);
                 for (let i = 0; i < dates.length; i++) {
                     holidays.push(new Date(Date.parse(dates[i]))); // Ajouter chaque date dans le tableau dateArray
                 }
-                console.log(holidays);
                 return holidays
             }
         })
@@ -203,12 +205,13 @@ box-shadow: 3px 3px 50px 27px rgba(255, 231, 251, 0.56);        backdrop-filter:
         }
     });
 
-    document.getElementById('max').addEventListener("keypress", function(event) {
+    document.getElementById('days').addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         event.preventDefault();
         document.getElementById("submit").click();
         }
     });
+
 
     </script>
 </body>
