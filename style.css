@@ -1,3 +1,8 @@
+@font-face {
+    font-family: bulgatti;
+    src: url(img/bulgatti.ttf);
+}
+
 html,body
 {
     width: 100%;
@@ -144,7 +149,8 @@ h1, h2, h3, h4{
 }
 
 .coolfont{
-    font-family: 'Shadows Into Light Two', cursive;
+    font-family: bulgatti, 'Shadows Into Light Two', cursive;
+
 }
 
 .logo{
