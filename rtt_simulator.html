@@ -121,11 +121,14 @@ box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter:
 
                 <button class='btn btn-outline-light mt-3' type="button" id="submit">OK</button>
             </form>
-            <h2 class="text-center my-3" id="result"></h2>
+            <div class="my-3">
+                <h2 class="text-center" id="result"></h2>
+                <p class="text-center" id="result2"></p>
+            </div>
         </div>
     </div>    
     <section class="copyrights">
-        <p class="text-center pt-2 pb-2 mb-0">Copyrights © Tous droits réservés | <a href="index.html" target="_blank" style="color: white;">Alexis Cosentino</a></p>
+        <p class="text-center pt-2 pb-2 mb-0">Copyrights © Tous droits réservés | <a href="index.html" target="_blank" style="color: white;">Alexis Cosentino</a> | <a href="mailto:contact@alexiscosentino.fr" style="color:black; background-color: white">Suggérer une amélioration</a></p>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 
@@ -165,7 +168,6 @@ box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter:
             let RTT = total_days - max - cp - week_end_days - holidays_in_week_days
 
 
-            const result = document.getElementById("result");
             const jsConfetti = new JSConfetti()
             jsConfetti.addConfetti({
                 confettiRadius: 6,
@@ -175,15 +177,17 @@ box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter:
                                 ],
             })
             
+            const result = document.getElementById("result");
+            const result2 = document.getElementById("result2");
 
-            // Créer un nouvel élément h1
-            const heading = document.createElement("h2");    
             console.log(today.getFullYear())
             if(today.getFullYear() <= year){
                 result.textContent = "En " + year + " vous aurez " + RTT + " jours de RTT !" ;
             } else {
                 result.textContent = "En " + year + " vous avez eu " + RTT + " jours de RTT !" ;
             }
+            result2.textContent = total_days + " jours en " + year + ", " + week_end_days + " jours de week-end et " + holidays_in_week_days + " jours fériés en semaine."
+
 
 
             async function getHolidays(year){
