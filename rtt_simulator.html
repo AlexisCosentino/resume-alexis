@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="icon" type="image/png" href="img/code.png"/>
-    <title>RTT Simulateur</title>
-    <title>Calcul des jours de RTT pour les cadres au forfait jour </title>
-    <meta name="description" content="Calculez vos jours de RTT en fonction du nombre de jours travaillés maximum. Obtenez un aperçu de vos droits en matière de RTT en fonction de votre situation professionnelle.">
-    <meta name="keywords" content="RTT, jours de RTT, jours de repos, calcul RTT, nombre de jours travaillés, droit aux RTT">
+    <title>Calculateur de RTT pour les cadres au forfait jour - Outil en ligne</title>
+    <meta name="description" content="Notre calculateur en ligne vous permet de déterminer rapidement et précisément le nombre de jours de RTT restants pour les cadres travaillant au forfait jour. Obtenez une estimation personnalisée de vos RTT en un clic !">    <meta name="keywords" content="RTT, jours de RTT, jours de repos, calcul RTT, nombre de jours travaillés, droit aux RTT">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="language" content="fr">
     <meta name="author" content="Alexis COSENTINO">
 </head>
 <style>
@@ -105,9 +105,10 @@ box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter:
 <body id="body">
     <div class="container">
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <h1 class="mt-3">Calculateur de RTT pour cadre au forfait jour</h1>
+            <h1 class="mt-3">Calculateur de RTT pour les cadres au forfait jour - Outil en ligne</h1>
+            <h2 class="h6 my-5">Notre calculateur en ligne vous permet de déterminer rapidement et précisément le nombre de jours de RTT restants pour les cadres travaillant au forfait jour. En utilisant des informations telles que le nombre maximum de jours travaillés selon la convention, l'année en cours et le nombre de congés payés, notre outil calcule automatiquement les jours de repos supplémentaires dont vous disposez. Obtenez une estimation personnalisée de vos RTT en un clic </h2>
 
-            <form class="my-5 d-flex justify-content-center align-items-center flex-column" id="card">
+            <form class="d-flex justify-content-center align-items-center flex-column" id="card">
                 <label class="form-label" for="year">Année :</label>
                 <input class="form-control w-100 mb-3" id="year" type="number" value="2023" min="2000" max="2050"/>
 
@@ -120,7 +121,7 @@ box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter:
 
                 <button class='btn btn-outline-light mt-3' type="button" id="submit">OK</button>
             </form>
-            <h2 class="text-center m-5" id="result"></h2>
+            <h2 class="text-center my-3" id="result"></h2>
         </div>
     </div>    
     <section class="copyrights">
@@ -133,6 +134,7 @@ box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter:
 
 
         document.getElementById('submit').addEventListener('click', async function() {
+            const today = new Date()
             const year = document.getElementById('year').value
             const cp = document.getElementById('cp').value
             const max = document.getElementById('days').value
@@ -175,9 +177,14 @@ box-shadow: 3px 3px 50px 10px rgba(255, 231, 251, 0.56);        backdrop-filter:
             
 
             // Créer un nouvel élément h1
-            const heading = document.createElement("h2");
-            // Ajouter du contenu au nouvel élément h1
-            result.textContent = "En " + year + " vous aurez " + RTT + " jours de RTT ! U+1F610" ;
+            const heading = document.createElement("h2");    
+            console.log(today.getFullYear())
+            if(today.getFullYear() <= year){
+                result.textContent = "En " + year + " vous aurez " + RTT + " jours de RTT !" ;
+            } else {
+                result.textContent = "En " + year + " vous avez eu " + RTT + " jours de RTT !" ;
+            }
+
 
             async function getHolidays(year){
                 const resp = await fetch('https://calendrier.api.gouv.fr/jours-feries/metropole/'+ year +'.json')
